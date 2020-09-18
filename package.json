@@ -15,7 +15,7 @@
   "main": "src/hooks",
   "files": [
     "src/hooks/*",
-    "src/libs"
+    "src/libs/*"
   ],
   "dependencies": {},
   "scripts": {
