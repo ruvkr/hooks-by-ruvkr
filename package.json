@@ -1,5 +1,9 @@
 {
   "name": "hooks-by-ruvkr",
+  "author": {
+    "name": "ruvkr",
+    "email": "34903858+ruvkr@users.noreply.github.com"
+  },
   "version": "0.1.0",
   "private": false,
   "description": "Custom react hooks I have created while working on my projects...",
@@ -10,7 +14,8 @@
   "homepage": "https://github.com/ruvkr/hooks-by-ruvkr.git",
   "main": "src/hooks",
   "files": [
-    "src/hooks/*"
+    "src/hooks/*",
+    "src/libs"
   ],
   "dependencies": {},
   "scripts": {
