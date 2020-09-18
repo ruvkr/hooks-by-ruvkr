@@ -1,7 +1,17 @@
 {
   "name": "hooks-by-ruvkr",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "Custom react hooks I have created while working on my projects...",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvkr/hooks-by-ruvkr.git"
+  },
+  "homepage": "https://github.com/ruvkr/hooks-by-ruvkr.git",
+  "main": "src/hooks",
+  "files": [
+    "src/hooks/*"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -37,11 +47,6 @@
     "hooks by ruvkr",
     "ruvkr"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ruvkr/hooks-by-ruvkr.git"
-  },
-  "description": "Custom react hooks I have created while working on my projects...",
   "devDependencies": {
     "framer-motion": "^2.6.13",
     "polished": "^3.6.6",
