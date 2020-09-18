@@ -1,0 +1,50 @@
+{
+  "name": "hooks-by-ruvkr",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "scripts": {
+    "start": "BROWSER=none react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "React custom hooks",
+    "React hooks",
+    "hooks by ruvkr",
+    "ruvkr"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvkr/hooks-by-ruvkr.git"
+  },
+  "description": "Custom react hooks I have created while working on my projects...",
+  "devDependencies": {
+    "framer-motion": "^2.6.13",
+    "polished": "^3.6.6",
+    "styled-components": "^5.2.0"
+  }
+}
