@@ -1,52 +1,69 @@
-import { useLayoutEffect, useState } from 'react';
-import { useDimensions } from './useDimensions';
-
-const m = 8;
+import { useLayoutEffect, useRef } from 'react';
+import { useDimensions } from './';
 
 /**
  * @param {React.MutableRefObject<HTMLElement>} ref_0
  * @param {React.MutableRefObject<HTMLElement>} ref_1
+ * @param {(data: {
+ *   x: number;
+ *   y: number;
+ *   relativeX: 'left' | 'right';
+ *   relativeY: 'top' | 'bottom';
+ * }) => void} callback
+ * @param {number} margin
  */
-const usePosition = (ref_0, ref_1) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const dimension_0 = useDimensions(ref_0);
-  const dimension_1 = useDimensions(ref_1);
+const usePosition = (ref_0, ref_1, callback = () => {}, margin = 16) => {
+  const dimension_0 = useRef(null);
+  const dimension_1 = useRef(null);
+
+  useDimensions(ref_0, data => (dimension_0.current = data));
+  useDimensions(ref_1, data => (dimension_1.current = data));
 
   useLayoutEffect(() => {
-    if (dimension_0.loaded && dimension_1.loaded) {
-      const { width: tw, height: th, x: tx, y: ty } = dimension_0;
-      const { width: iw, height: ih } = dimension_1;
+    if (dimension_0.current && dimension_1.current) {
+      const { width: tw, height: th, x: tx, y: ty } = dimension_0.current;
+      const { width: iw, height: ih } = dimension_1.current;
       const { innerWidth: pw, innerHeight: ph } = window;
 
-      const leftSpace = tx + tw - m;
-      const rightSpace = pw - tx - m;
-      const upSpace = ty - m;
-      const downSpace = ph - ty - th - m;
+      const leftSpace = tx + tw - margin;
+      const rightSpace = pw - tx - margin;
+      const upSpace = ty - margin;
+      const downSpace = ph - ty - th - margin;
 
       let x = 0;
       let y = 0;
+      let relativeX = 'right';
+      let relativeY = 'top';
+
+      // default placing position left bottom
 
       if (rightSpace > leftSpace && iw > leftSpace) {
-        x = tx;
-        if (x < m) x = m;
+        // plcing in right
+        x = tx < margin ? margin : tx;
+        if (x + iw > pw - margin) x = pw - margin - iw;
+
+        relativeX = 'left';
       } else {
-        x = tx + tw - iw;
-        if (x + iw > pw - m) x = pw - iw - m;
+        // placing in left
+        x = tx + tw > pw - margin ? pw - margin - iw : tx + tw - iw;
+        if (x < margin) x = margin;
       }
 
       if (upSpace > downSpace && ih > downSpace) {
-        y = ty - ih;
-        if (y < m) y = m;
+        // placing in top
+        y = ty > ph - margin ? ph - ih - margin : ty - ih;
+        if (y < margin) y = margin;
+
+        relativeY = 'bottom';
       } else {
-        y = ty + th;
-        if (y + ih > ph - m) y = ph - ih - m;
+        // placing in bottom
+        y = ty + th < margin ? margin : ty + th;
+        if (y + ih > ph - margin) y = ph - ih - margin;
       }
 
-      setPosition({ x, y });
-    }
-  }, [dimension_0, dimension_1]);
-
-  return position;
+      callback({ x, y, relativeX, relativeY });
+    } else callback(null);
+  }, [dimension_0, dimension_1, margin, callback]);
 };
 
 export { usePosition };
